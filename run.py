@@ -9,6 +9,7 @@ Other: Run File to run the project with the wanted parameters
 import argparse
 from src.features.DataTransforms import DataTransforms
 from src.data.DataManager import get_data
+from src.TrainManager import TrainManager
 
 def argument_parser():
     """
@@ -43,7 +44,7 @@ if __name__ == "__main__":
     # First, we get all of the user's arguments
     args = argument_parser()
 
-    val_size = args.validation_size
+    validation_size = args.validation_size
     batch_size = args.batch_size
     learning_rate = args.learning_rate
     num_epochs = args.num_epochs
@@ -68,10 +69,14 @@ if __name__ == "__main__":
 
     #################
 
-    ##### TO DO #####
-    # We create the training manager
-
-    #################
+    # We create the training manager (WARNING : if you don't have a GPU, put use_cuda to False)
+    trainer = TrainManager(model=model,
+                        train_set=train_set,
+                        test_set=test_set,
+                        batch_size=batch_size,
+                        num_epochs=num_epochs,
+                        validation_size=validation_size,
+                        use_cuda=True)
 
     print("Training {} on {} for {} epochs".format(args.model, args.dataset, args.num_epochs))
 
