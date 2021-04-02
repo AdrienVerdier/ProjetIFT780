@@ -9,6 +9,8 @@ Other: Run File to run the project with the wanted parameters
 import argparse
 from src.features.DataTransforms import DataTransforms
 from src.data.DataManager import get_data
+from src.TrainManager import TrainManager
+from src.models.CNNVanilla import CnnVanilla
 
 def argument_parser():
     """
@@ -43,7 +45,7 @@ if __name__ == "__main__":
     # First, we get all of the user's arguments
     args = argument_parser()
 
-    val_size = args.validation_size
+    validation_size = args.validation_size
     batch_size = args.batch_size
     learning_rate = args.learning_rate
     num_epochs = args.num_epochs
@@ -65,17 +67,25 @@ if __name__ == "__main__":
     ##### TO DO #####
     # We create our models
     # The name of our model is in args.model
+    # TEMPORARY  (10 because CIFAR10 is 10 classes to watch for the others (10177 for celebA and mnist 10 classes)): 
+    # Very long because there is no optimizer yet 
+    model = CnnVanilla(num_classes=10)
 
     #################
 
-    ##### TO DO #####
-    # We create the training manager
-
-    #################
+    # We create the training manager (WARNING : if you don't have a GPU, put use_cuda to False)
+    trainer = TrainManager(model=model,
+                        train_set=train_set,
+                        test_set=test_set,
+                        batch_size=batch_size,
+                        num_epochs=num_epochs,
+                        validation_size=validation_size,
+                        use_cuda=True)
 
     print("Training {} on {} for {} epochs".format(args.model, args.dataset, args.num_epochs))
 
+    trainer.train()
+    trainer.evaluate_test()
+
     ##### TO DO #####
-    # We train our model 
-    # We evaluate on the test set
-    # We displays (and save our graphics)
+    # We displays our graphs (and save our graphics)
