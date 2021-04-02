@@ -1,12 +1,14 @@
 """
 Projet de session IFT780
 Date:
-Authors: Alexandre Turpin, Quentin Levieux et Adrien Verdier
+Authors: Alexandre Turpin, Quentin Levieux and Adrien Verdier
 License: Opensource, free to use
 Other: Run File to run the project with the wanted parameters
 """
 
 import argparse
+from src.features.DataTransforms import DataTransforms
+from src.data.DataManager import get_data
 
 def argument_parser():
     """
@@ -47,11 +49,33 @@ if __name__ == "__main__":
     num_epochs = args.num_epochs
     data_aug = args.data_aug
 
-    print("Model = ", args.model)
-    print("Dataset = ", args.dataset)
-    print("optimizer = ", args.optimizer)
-    print("validation_size = ", val_size)
-    print("batch_size = ", batch_size)
-    print("learning_rate = ", learning_rate)
-    print("num_epochs = ", num_epochs)
-    print("data_aug = ", data_aug)
+    # Here, we get the transform to use on our images depending on the parameters data_aug
+    transforms = DataTransforms(data_aug)
+    train_transform, test_transform = transforms.get_transforms()
+
+    # We get the dataset we want and apply the transforms on it
+    train_set, test_set = get_data(args.dataset, train_transform, test_transform)
+
+    ##### TO DO #####
+    # We set the optimizer
+    # The name is set in args.optimizer
+
+    #################
+
+    ##### TO DO #####
+    # We create our models
+    # The name of our model is in args.model
+
+    #################
+
+    ##### TO DO #####
+    # We create the training manager
+
+    #################
+
+    print("Training {} on {} for {} epochs".format(args.model, args.dataset, args.num_epochs))
+
+    ##### TO DO #####
+    # We train our model 
+    # We evaluate on the test set
+    # We displays (and save our graphics)
