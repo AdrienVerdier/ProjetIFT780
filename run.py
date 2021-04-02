@@ -36,6 +36,8 @@ def argument_parser():
     parser.add_argument('--batch_size', type=int, default=20, help='Size of each training batch')
     parser.add_argument('--learning_rate', type=float, default=0.001, help='learning rate for the training')
     parser.add_argument('--num_epochs', type=int, default=10, help='Number of epoch for the training')
+    parser.add_argument('--metric', type=str, default='entropy', choices=["entropy", "margin", "prioritisation"],
+                        help='The metric you want to use for active learning')
     parser.add_argument('--data_aug', action='store_true', help='If we want to use data_augmentation')
 
     return parser.parse_args()
@@ -80,6 +82,7 @@ if __name__ == "__main__":
                         batch_size=batch_size,
                         num_epochs=num_epochs,
                         validation_size=validation_size,
+                        metric=args.metric,
                         use_cuda=True)
 
     print("Training {} on {} for {} epochs".format(args.model, args.dataset, args.num_epochs))
