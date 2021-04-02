@@ -67,8 +67,8 @@ if __name__ == "__main__":
     ##### TO DO #####
     # We create our models
     # The name of our model is in args.model
-    # TEMPORARY  (10 because CIFAR10 is 10 classes to watch for the others):
-    # Very long because there is no optimizer yet
+    # TEMPORARY  (10 because CIFAR10 is 10 classes to watch for the others (10177 for celebA and mnist 10 classes)): 
+    # Very long because there is no optimizer yet 
     model = CnnVanilla(num_classes=10)
 
     #################
