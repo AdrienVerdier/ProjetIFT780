@@ -10,6 +10,7 @@ import argparse
 from src.features.DataTransforms import DataTransforms
 from src.data.DataManager import get_data
 from src.TrainManager import TrainManager
+from src.models.CNNVanilla import CnnVanilla
 
 def argument_parser():
     """
@@ -66,6 +67,9 @@ if __name__ == "__main__":
     ##### TO DO #####
     # We create our models
     # The name of our model is in args.model
+    # TEMPORARY  (10 because CIFAR10 is 10 classes to watch for the others):
+    # Very long because there is no optimizer yet
+    model = CnnVanilla(num_classes=10)
 
     #################
 
@@ -80,7 +84,8 @@ if __name__ == "__main__":
 
     print("Training {} on {} for {} epochs".format(args.model, args.dataset, args.num_epochs))
 
+    trainer.train()
+    trainer.evaluate_test()
+
     ##### TO DO #####
-    # We train our model 
-    # We evaluate on the test set
-    # We displays (and save our graphics)
+    # We displays our graphs (and save our graphics)
