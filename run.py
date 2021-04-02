@@ -17,7 +17,7 @@ def argument_parser():
             parser : element that will contain all the user's arguments to run the program
     """
 
-    parser = argparse.ArgumentParser(usage='\n python3 run.py [model] [dataset] [paramaters]'
+    parser = argparse.ArgumentParser(usage='\n python3 run.py [model] [dataset] [paramaters]',
                                     description="This program allows to run different neural networks on"
                                     " different datasets.")
     
