@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 ## Run the project 
 
-blablabla
+blablabla test
 
 ## Project structure
 
