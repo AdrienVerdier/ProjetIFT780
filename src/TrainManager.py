@@ -18,7 +18,7 @@ class TrainManager():
         Class used to Manage the training of our different models
     """
 
-    def __init__(self, model, train_set, test_set, batch_size, num_epochs, validation_size, use_cuda):
+    def __init__(self, model, train_set, test_set, batch_size, num_epochs, validation_size, metric, use_cuda):
         """
             Args:
                 model: The model that we want to train
@@ -27,6 +27,7 @@ class TrainManager():
                 batch_size: The batch size that we want to use for the training
                 num_epochs: the number of epochs for the training
                 validation_size: Pourcentage of data to use for validation
+                metric: the metric to use for the active learning
                 use_cada: If we want to use the gpu for the training
         """
         # If you don't 
@@ -43,6 +44,7 @@ class TrainManager():
         self.model = model.to(self.device)
         self.num_epochs = num_epochs
         self.loss_function = nn.CrossEntropyLoss()
+        self.metric = metric
         self.use_cuda = use_cuda
         self.train_loss = []
         self.train_accuracy = []
